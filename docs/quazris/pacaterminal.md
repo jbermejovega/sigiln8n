@@ -21,10 +21,12 @@ layers:
   - SIGILBOOK
   - RULEZERO
   - API_MANIFEST
+  - HYPERDOC
 subsystems:
   sigilbook: ./sigilbook.md
   rulezero: ./rulezero.md
   api_manifest: ./api_manifest.md
+  hyperdoc: ./quazris_hyperdoc.md
 ```
 
 ## Pacaterminal Link
@@ -139,3 +141,7 @@ It forbids force-move transport and makes replay-safe admissible transport canon
 
 `./api_manifest.md` declares the self-exposed MCP surface for plural MCP and Sigil MCP communication.
 All public agent interfaces must preserve the Pacaterminal link, Sigilbook registration, and Rulezero transport invariant.
+
+## Hyperdoc
+
+`./quazris_hyperdoc.md` is the all-in-one canonical reading surface for Pacaterminal, Sigilbook, Rulezero, the API manifest, and the SIGILN8N QQUAPP subsystem.
