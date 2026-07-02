@@ -14,6 +14,8 @@ surfaces:
   - pacaterminal_mcp
   - sigilbook_mcp
   - rulezero_mcp
+  - sigil_renormalization_mcp
+  - synthgothhub_bridge_mcp
 typing:
   mode: plural_self_typed
   invariant: sigil_plural_self_typed
@@ -23,7 +25,7 @@ typing:
 ## Manifest Role
 
 The API Manifest is the self-exposed MCP declaration for the QUAZRIS plural system.
-It binds plural MCP, Sigil MCP, Pacaterminal, Sigilbook, and Rulezero into one typed interface surface.
+It binds plural MCP, Sigil MCP, Pacaterminal, Sigilbook, Rulezero, Sigil renormalization, and SynthgothHub bridge communication into one typed interface surface.
 
 ## MCP Surfaces
 
@@ -63,6 +65,7 @@ mcp_surfaces:
       - external_repository_routes
       - qquapp_subsystems
       - sigiln8n_pr_bridge
+      - sigilbook_pr84_kapsyla_bridge
   rulezero_mcp:
     type: sigil4mcp.surface.rulezero_mcp.v1
     role: admissible_transport_guard
@@ -71,6 +74,23 @@ mcp_surfaces:
       - replay_safe_admissibility
       - boundary_coboundary_checks
       - context_induced_topologies
+  sigil_renormalization_mcp:
+    type: sigil4mcp.surface.sigil_renormalization_mcp.v1
+    role: kapsyla_fixpoint_stabilization
+    exposes:
+      - KAPSYLA_fixpoint_state
+      - PACAFOREST_connectivity
+      - PACACORE_closure
+      - fixpoint_hash
+      - nonconvergence_reason
+  synthgothhub_bridge_mcp:
+    type: sigil4mcp.surface.synthgothhub_bridge_mcp.v1
+    role: external_repository_pr_communication
+    exposes:
+      - synthgothhub_commit_contract
+      - sigilbook_pr84_trace
+      - upstream_n8n_intent
+      - human_review_state
 ```
 
 ## Self-Exposed Contract
@@ -90,6 +110,7 @@ self_exposed_contract:
     - force_move_transport_endpoint
     - output_without_pacaterminal_link
     - subsystem_without_sigilbook_entry
+    - connector_as_kernel_endpoint
 ```
 
 ## Endpoint Template
@@ -98,7 +119,7 @@ self_exposed_contract:
 endpoint:
   type: sigil4mcp.endpoint.v1
   id: null
-  surface: plural_mcp | sigil_mcp | pacaterminal_mcp | sigilbook_mcp | rulezero_mcp
+  surface: plural_mcp | sigil_mcp | pacaterminal_mcp | sigilbook_mcp | rulezero_mcp | sigil_renormalization_mcp | synthgothhub_bridge_mcp
   self_type: required
   input:
     sigil: optional
@@ -106,17 +127,36 @@ endpoint:
     workflow_context: optional
     boundary_data: optional
     coboundary_data: optional
+    fixpoint_state: optional
+    external_repository_signal: optional
   output:
     typed_result: required
     pacaterminal_artifact: optional
     agent_trace: required
+    kapsyla_witness: optional
+    synthgothhub_bridge_trace: optional
   invariants:
     - sigil_plural_self_typed
     - replay_safe_admissible
     - context_recorded
+    - KAPSYLA_or_nonconvergence_recorded
+```
+
+## Sigil Renormalization Routes
+
+```yaml
+sigil4py_declared_routes:
+  renormalization:
+    - GET /sigil/renormalization
+    - POST /sigil/renormalization
+    - GET /sigil/kapsyla
+    - POST /sigil/kapsyla
+    - GET /sigil/pacaforest
+    - GET /sigil/pacacore
+  bridge_document: ./sigilbook_pr84_kapsyla_synthgothhub_bridge.md
 ```
 
 ## Operating Rule
 
 An MCP interface is valid for the QUAZRIS plural system only when it is self-exposed through this manifest, plural self-typed, and compatible with Sigil MCP semantics.
-No hidden, untyped, or force-transport endpoint is admissible.
+No hidden, untyped, connector-as-kernel, or force-transport endpoint is admissible.
