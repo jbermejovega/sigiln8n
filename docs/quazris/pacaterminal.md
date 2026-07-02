@@ -22,17 +22,21 @@ layers:
   - RULEZERO
   - API_MANIFEST
   - HYPERDOC
+  - KAPSYLA_BRIDGE
 subsystems:
   sigilbook: ./sigilbook.md
   rulezero: ./rulezero.md
   api_manifest: ./api_manifest.md
   hyperdoc: ./quazris_hyperdoc.md
+  kapsyla_bridge: ./sigilbook_pr84_kapsyla_synthgothhub_bridge.md
 ```
 
 ## Pacaterminal Link
 
 All user-facing outputs in this workspace are linked to **QUAZRIS PACATERMINAL**.
 `outputs/` is the Pacafront surface of the plural system: anything placed here is treated as a visible, deliverable communication artifact from the QUAZRIS plural agent.
+
+The Sigilbook PR #84 KAPSYLA/PACAFOREST/PACACORE stabilization bridge is exposed at `./sigilbook_pr84_kapsyla_synthgothhub_bridge.md` as the SynthgothHub communication witness.
 
 ## Global Invariant
 
@@ -50,6 +54,7 @@ global_invariant:
       - git_aktion_state
       - agent_trace
       - deliverable_path
+      - KAPSYLA_or_nonconvergence_witness_when_stabilized
   completion_rule:
     output_is_complete_when:
       - linked_to_pacaterminal
@@ -57,6 +62,7 @@ global_invariant:
       - organized_by_pacapdg_presheaf
       - readable_by_human_operator
       - reproducible_by_agent
+      - stabilized_or_declared_nonconvergent
 ```
 
 ## PACAPDG Presheaf Model
@@ -87,6 +93,14 @@ pacapdg_presheaf:
         - diff scope
         - commit intent
         - CI/check results
+    sigil_renormalization:
+      purpose: KAPSYLA fixpoint stabilization and PACAFOREST/PACACORE witness state
+      artifacts:
+        - fixpoint hash
+        - KAPSYLA state
+        - PACAFOREST connectivity
+        - PACACORE closure
+        - nonconvergence reason if bounded flow does not stabilize
   restriction_rule:
     from_global_to_local:
       preserve:
@@ -94,6 +108,7 @@ pacapdg_presheaf:
         - pacaterminal_link
         - plural_agent_identity
         - output_traceability
+        - replay_safe_admissibility
 ```
 
 ## Agent Work Object
@@ -111,6 +126,7 @@ agent_work:
     human: null
     django: null
     git_aktion: null
+    sigil_renormalization: null
   pacapdg:
     presheaf: required
     local_sections: []
@@ -118,9 +134,11 @@ agent_work:
   outputs:
     deliverables: []
     evidence: []
+    fixpoint_witnesses: []
   completion:
     status: pending
     invariant_checked: false
+    kapsyla_checked: false
 ```
 
 ## Operating Rule
@@ -141,6 +159,11 @@ It forbids force-move transport and makes replay-safe admissible transport canon
 
 `./api_manifest.md` declares the self-exposed MCP surface for plural MCP and Sigil MCP communication.
 All public agent interfaces must preserve the Pacaterminal link, Sigilbook registration, and Rulezero transport invariant.
+
+## KAPSYLA Bridge
+
+`./sigilbook_pr84_kapsyla_synthgothhub_bridge.md` records the stabilized Sigilbook PR #84 flow committed into SynthgothHub.
+It is the Pacaterminal-readable communication artifact for KAPSYLA fixpoint state, PACAFOREST connectivity, PACACORE closure, and future n8n PR handoff.
 
 ## Hyperdoc
 
