@@ -34,7 +34,7 @@ required:
   - failures_preserved
   - trace_append_only
   - replay_metadata_present
-  - no_direct_main_mutation
+  - no_direct_default_branch_mutation
 
 reject_if:
   - hidden_tool_call
@@ -45,6 +45,25 @@ reject_if:
   - missing_trace
   - source_provenance_erased
 ```
+
+## QuasarPi plural-typed resource admission
+
+The SIGILBOOK resource `QUASARPI_PLURAL_TYPED_QUNOS_MIMBREPI_LAURELPI_RENDER_LIVECODE_RESOURCE_V1` may be orchestrated only as a bounded review workflow.
+
+```yaml
+quasarpi_resource:
+  source_authority: jbermejovega/sigilbook
+  workflow_status: exported_inactive
+  credentials: none
+  external_calls: false
+  repository_mutation: false
+  stable_diffusion: plan_only
+  sonic_pi: source_only
+  kuirkode: declarative_boundary_validation
+  human_review_required: true
+```
+
+The workflow must preserve QUNOS plurality, MimbrePi resource relations, LaurelPi boundary status, provenance, hashes, failures, and claim classes. It must reject implicit model downloads, automatic image generation, audio-server execution, webhook registration, and promotion without a replay witness.
 
 ## Workflow status vocabulary
 
@@ -74,7 +93,11 @@ read
 RAG retrieves.
 MCP bounds tools.
 n8n orchestrates.
+QuasarPi routes a review plan only.
+Stable Diffusion remains plan-only.
+Sonic Pi remains source-only.
 Failures remain visible.
 Trace replays.
 No identity transport.
+PIORNALEGO ES CANON.
 ```
