@@ -1,0 +1,31 @@
+id: TROPE_TYPED_SIGIL_QUIMBO_NORMALIZER_V1
+version: 1
+repository: jbermejovega/sigiln8n
+role: orchestration_projection
+implementation: .sigil/livecode/tropeTypedSigil.ts
+status:
+  active_candidate: true
+  deterministic: true
+  side_effect_free: true
+  replay_safe: true
+n8n:
+  active_by_default: false
+  allowed:
+    - validate_input
+    - normalize_branch_weights
+    - emit_obstruction
+    - append_trace
+  forbidden:
+    - arbitrary_command_execution
+    - repository_write
+    - deployment
+    - identity_transport
+livecode:
+  mode: plan_and_validate_only
+  external_execution: false
+invariants:
+  - SAFE_REPLAY
+  - TRACE_PRESERVED
+  - PI_FIXED
+  - NO_IDENTITY_TRANSPORT
+  - NO_PLURAL_COLLAPSE
